@@ -1,0 +1,38 @@
+body{
+    margin: 50px 200px;
+    background-image: url(images/background3.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+    padding: 40px;
+    background-color: white;
+    min-height: 100vh; /*내가 보는 화면의  높이만큼*/
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.task-area{
+    border: 1px solid lightblue;
+    margin-top: 2em;
+}
+.task-tabs{
+    display: flex; /*가로 정렬*/
+    border-bottom: 1px solid lightblue;
+    position: relative; /*기준점이 됨*/
+}
+.task-tabs div{
+    padding: 1em;
+}
+#under-line{
+    height: 4px;
+    background-color: rgb(255, 173, 233);
+    position: absolute;
+    width: 40px;
+    left: 5px;
+    top: 52px;
+    padding: 0px;
+}
+.task{
+    display: flex;
+    justify-content: space-between; /*간격*/
+    padding: 1em;
+}
