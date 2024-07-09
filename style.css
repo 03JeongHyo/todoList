@@ -35,4 +35,32 @@ body{
     display: flex;
     justify-content: space-between; /*간격*/
     padding: 1em;
+    border: 1px solid #ccc; 
+    
+}
+.task-tabs div{
+    cursor: pointer;
+}
+.task-done{
+    text-decoration: line-through;
+}
+.button-check {
+    background-color: #28a745;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.button-delete {
+    background-color: #dc3545;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.button-check-done {
+    background-color: #3e8e41;
+}
+
+.task-completed {
+    background-color: #dabbff88; 
 }
