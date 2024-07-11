@@ -11,23 +11,51 @@ body{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .task-area{
-    border: 1px solid lightblue;
+    border: 2px solid rgba(171, 170, 192, 0.493);
     margin-top: 2em;
 }
 .task-tabs{
     display: flex; /*가로 정렬*/
-    border-bottom: 1px solid lightblue;
+    border-bottom: 2px solid rgb(190, 190, 190);
     position: relative; /*기준점이 됨*/
 }
 .task-tabs div{
     padding: 1em;
 }
+#add-button {
+    background-color: #af74fcb7; 
+    color: white; 
+    border: none;
+    padding: 8px 12px; 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    border-radius: 10%; 
+    transition: background-color 0.3s ease; 
+    margin-right: 5px;
+}
+
+
+
+#task-input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: calc(100% - 80px); 
+    margin-right: 10px;
+}
+
+#task-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
 #under-line{
     height: 4px;
-    background-color: rgb(255, 173, 233);
+    background-color: rgba(253, 166, 246, 0.76);
     position: absolute;
-    width: 40px;
-    left: 5px;
+    width: 43px;
+    left: 9px;
     top: 52px;
     padding: 0px;
 }

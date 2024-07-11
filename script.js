@@ -13,7 +13,15 @@ let taskInput = document.getElementById("task-input");
 let addButton = document.getElementById("add-button");
 let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
+let filterList = [];
+let mode='all-div'
+
 addButton.addEventListener("click",addTask);
+taskInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        addTask();
+    }
+});
 
 for(let i=1; i<tabs.length; i++){
     tabs[i].addEventListener("click",function(event){
@@ -23,12 +31,17 @@ for(let i=1; i<tabs.length; i++){
 
 
 function addTask() {
+    if (taskInput.value.trim() === "") {
+        alert("할일을 입력해주세요.");
+        return;
+    }
     let task = {
         id:randomIDGenerate(),
         taskContent: taskInput.value,
         isComplete: false,
     }
     taskList.push(task);
+    taskInput.value = "";
     console.log(taskList);
     render();
 }
@@ -36,29 +49,35 @@ function addTask() {
 
 
 function render(){
-    let resultHTML = '';
-    for(let i=0; i<taskList.length; i++){
-        if(taskList[i].isComplete == true){
+    if(mode === "all-div"){
+        list = taskList;
+    }else if(mode === "on-div" || mode === "done-div"){
+        list = filterList;
+    }
+
+    let resultHTML = "";
+    for(let i=0; i<list.length; i++){
+        if(list[i].isComplete == true){
            resultHTML+=`<div class="task task-completed">
-            <div class ="task-done">${taskList[i].taskContent}</div>
+            <div class ="task-done">${list[i].taskContent}</div>
             <div>
-                <button class="button-check" onclick="toggleComplete('${taskList[i].id}')">
+                <button class="button-check" onclick="toggleComplete('${list[i].id}')">
                     <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i>
                 </button> 
-                <button class="button-delete" onclick="deleteTask('${taskList[i].id}')">
+                <button class="button-delete" onclick="deleteTask('${list[i].id}')">
                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                 </button>
             </div>
         </div>`;
         }else{
             resultHTML += `<div class="task">
-            <div>${taskList[i].taskContent}</div>
+            <div>${list[i].taskContent}</div>
             <div>
-                <button class="button-check" onclick="toggleComplete('${taskList[i].id}')">
+                <button class="button-check" onclick="toggleComplete('${list[i].id}')">
                     <i class="fa-solid fa-check" style="color: #ffffff;"></i>
                 </button>
 
-                <button class="button-delete" onclick="deleteTask('${taskList[i].id}')">
+                <button class="button-delete" onclick="deleteTask('${list[i].id}')">
                     <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                 </button>
             </div>
@@ -86,7 +105,8 @@ function deleteTask(id){
             break;
         }
     }
-    render();   
+    filterList = filterList.filter(item => item.id !== id);
+    render();
 }
 
 let taskElement = document.getElementById(id);
@@ -97,10 +117,31 @@ if (taskElement.classList.contains('task-completed')) {
 }
 
 function filter(event){
-    console.log("filter", event.target);
+    mode = event.target.id;
+    filterList = [];
+    if(mode === "all-div"){
+        document.getElementById("under-line").style.left = "12px";
+        render();
+    }else if(mode === "on-div"){
+        document.getElementById("under-line").style.left = "82px";
+        for(let i=0; i<taskList.length; i++){
+            if(taskList[i].isComplete === false){
+                filterList.push(taskList[i])
+            }
+        }
+        render();
+        console.log("진행중",filterList);
+    }else if(mode === "done-div"){
+        document.getElementById("under-line").style.left = "155px";
+        for(let i=0; i<taskList.length; i++){
+            if(taskList[i].isComplete === true){
+                filterList.push(taskList[i])
+            }
+        }
+        render();
+    }
 }
 
 function randomIDGenerate(){
     return '_' + Math.random().toString(36).substr(2, 9);
 }
-
